@@ -38,7 +38,11 @@ final class LunchCookTime {
         final int soupCookTime = 105;
         final int lunchMax = 3;
         final int oneMinute = 60;
-        final int lunchAmountInt;
+        final int lunchAmountInt; 
+	final heatingAmountString = "How many are you heating? (Max 3): ";
+        final String totalCookTimeString = "Total cook time:\n";
+        final String minutesString = " minutes, ";
+        final String secondsString = " seconds.";
 
         // input
         final Scanner scanner = new Scanner(System.in);
@@ -48,7 +52,7 @@ final class LunchCookTime {
         // process
         switch (lunchType) {
             case "sub":
-                System.out.print("How many are you heating? (Max 3): ");
+                System.out.print(heatingAmountString);
                 lunchAmountInt = Integer.parseInt(scanner.nextLine());
                 // error check
                 if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
@@ -58,11 +62,11 @@ final class LunchCookTime {
                     final float totalCookTime = (subCookTime / 2) + ((subCookTime / 2) * lunchAmountInt);
                     final float cookTimeSeconds = totalCookTime % oneMinute;
                     final double cookTimeMinutes = Math.floor(totalCookTime / oneMinute);
-                    System.out.println("Total cook time:\n" + cookTimeMinutes + " minutes, " + cookTimeSeconds + " seconds.");
+                    System.out.println(totalCookTimeString + cookTimeMinutes + minutesString + cookTimeSeconds + secondsString);
                 }
                 break;
             case "pizza":
-                System.out.print("How many are you heating? (Max 3): ");
+                System.out.print(heatingAmountString);
                 lunchAmountInt = Integer.parseInt(scanner.nextLine());
                 // error check
                 if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
@@ -72,11 +76,11 @@ final class LunchCookTime {
                     final float totalCookTime = (pizzaCookTime / 2) + ((pizzaCookTime / 2) * lunchAmountInt);
                     final float cookTimeSeconds = totalCookTime % oneMinute;
                     final double cookTimeMinutes = Math.floor(totalCookTime / oneMinute);
-                    System.out.println("Total cook time:\n" + cookTimeMinutes + " minutes, " + cookTimeSeconds + " seconds.");
+                    System.out.println(totalCookTimeString + cookTimeMinutes + minutesString + cookTimeSeconds + secondsString);
                 }
                 break;
             case "soup":
-                System.out.print("How many are you heating? (Max 3): ");
+                System.out.print(heatingAmountString);
                 lunchAmountInt = Integer.parseInt(scanner.nextLine());
                 // error check
                 if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
@@ -86,7 +90,7 @@ final class LunchCookTime {
                     final float totalCookTime = (soupCookTime / 2) + ((soupCookTime / 2) * lunchAmountInt);
                     final float cookTimeSeconds = totalCookTime % oneMinute;
                     final double cookTimeMinutes = Math.floor(totalCookTime / oneMinute);
-                    System.out.println("Total cook time:\n" + cookTimeMinutes + " minutes, " + cookTimeSeconds + " seconds.");
+		    System.out.println(totalCookTimeString + cookTimeMinutes + minutesString + cookTimeSeconds + secondsString);
                 }
                 break;
             default:
