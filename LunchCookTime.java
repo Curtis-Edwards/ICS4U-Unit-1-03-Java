@@ -36,69 +36,42 @@ final class LunchCookTime {
         final int subCookTime = 60;
         final int pizzaCookTime = 45;
         final int soupCookTime = 105;
-        final int lunchMax = 3;
         final int oneMinute = 60;
         final int lunchAmountInt; 
-	final heatingAmountString = "How many are you heating? (Max 3): ";
-        final String totalCookTimeString = "Total cook time:\n";
-        final String minutesString = " minutes, ";
-        final String secondsString = " seconds.";
 
         // input
         final Scanner scanner = new Scanner(System.in);
         System.out.print("Are you heating sub, pizza, or soup? (lowercase): ");
         final String lunchType = scanner.nextLine();
+		System.out.print("How many are you heating? (Max 3): ");
+		lunchAmountInt = Integer.parseInt(scanner.nextLine());
+	
+		// error check
+		if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
+		    System.out.println("Invalid input.");
+		} else {
+		    // process
+	        switch (lunchType) {
+				case "sub":
+			        final float totalCookTime = (subCookTime / 2) + ((subCookTime / 2) * lunchAmountInt);
+		        	break;
+			    case "pizza":
+			        final float totalCookTime = (pizzaCookTime / 2) + ((pizzaCookTime / 2) * lunchAmountInt);
+		        	break;
+		        case "soup":
+			        final float totalCookTime = (soupCookTime / 2) + ((soupCookTime / 2) * lunchAmountInt);
+			        break;
+		        default:
+		        	System.out.println("Invalid input");
+		        break;
+			}
+	    }
+		// output
+		final float cookTimeSeconds = totalCookTime % 60;
+		final double cookTimeMinutes = Math.floor(totalCookTime / 60);
+		System.out.println("Total cook time:\n" + cookTimeMinutes + " minutes, " + cookTimeSeconds + " seconds.");
 
-        // process
-        switch (lunchType) {
-            case "sub":
-                System.out.print(heatingAmountString);
-                lunchAmountInt = Integer.parseInt(scanner.nextLine());
-                // error check
-                if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
-                    System.out.println("Invalid input.");
-                } else {
-                    // process & output
-                    final float totalCookTime = (subCookTime / 2) + ((subCookTime / 2) * lunchAmountInt);
-                    final float cookTimeSeconds = totalCookTime % oneMinute;
-                    final double cookTimeMinutes = Math.floor(totalCookTime / oneMinute);
-                    System.out.println(totalCookTimeString + cookTimeMinutes + minutesString + cookTimeSeconds + secondsString);
-                }
-                break;
-            case "pizza":
-                System.out.print(heatingAmountString);
-                lunchAmountInt = Integer.parseInt(scanner.nextLine());
-                // error check
-                if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
-                    System.out.println("Invalid input.");
-                } else {
-                    // process & output
-                    final float totalCookTime = (pizzaCookTime / 2) + ((pizzaCookTime / 2) * lunchAmountInt);
-                    final float cookTimeSeconds = totalCookTime % oneMinute;
-                    final double cookTimeMinutes = Math.floor(totalCookTime / oneMinute);
-                    System.out.println(totalCookTimeString + cookTimeMinutes + minutesString + cookTimeSeconds + secondsString);
-                }
-                break;
-            case "soup":
-                System.out.print(heatingAmountString);
-                lunchAmountInt = Integer.parseInt(scanner.nextLine());
-                // error check
-                if (lunchAmountInt < 0 || lunchAmountInt > lunchMax) {
-                    System.out.println("Invalid input.");
-                } else {
-                    // process & output
-                    final float totalCookTime = (soupCookTime / 2) + ((soupCookTime / 2) * lunchAmountInt);
-                    final float cookTimeSeconds = totalCookTime % oneMinute;
-                    final double cookTimeMinutes = Math.floor(totalCookTime / oneMinute);
-		    System.out.println(totalCookTimeString + cookTimeMinutes + minutesString + cookTimeSeconds + secondsString);
-                }
-                break;
-            default:
-                System.out.println("Invalid");
-                break;
-        }
-
-        System.out.println("\nDone.");
+		System.out.println("\nDone.");
     }
 }
 
